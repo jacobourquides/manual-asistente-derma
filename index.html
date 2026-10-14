@@ -110,16 +110,40 @@
   .testnotes .tnt th,.testnotes .tnt td{border:1px solid var(--grid);padding:4px 6px;text-align:left;vertical-align:top;}
   .testnotes .tnt th{background:#efeee9;}
   .testnotes .warn{color:#a02c2c;font-weight:600;margin-top:10px;}
+  .tabs{display:flex;gap:4px;height:100%;}
+  .tabs a{display:flex;align-items:center;padding:0 14px;color:var(--ink-2);border-bottom:2px solid transparent;font-weight:500;cursor:pointer;}
+  .tabs a.on{color:var(--ink-1);border-bottom-color:var(--accent);font-weight:600;}
+  .pbox{background:var(--surface-1);border:1px solid var(--grid);border-radius:12px;padding:12px 16px;margin-bottom:14px;}
+  .pbox summary{cursor:pointer;font-weight:700;font-size:14px;}
+  .pbox .cnt{display:inline-block;background:#efeee9;border-radius:999px;padding:1px 9px;font-size:12px;margin-left:6px;}
+  .pl{list-style:none;margin-top:8px;}
+  .pi{display:flex;align-items:flex-start;gap:10px;padding:8px 2px;border-bottom:1px solid #f0efea;font-size:13px;}
+  .pi:last-child{border-bottom:none;}
+  .pi label{display:flex;gap:10px;align-items:flex-start;flex:1;cursor:pointer;}
+  .pi input{margin-top:2px;width:16px;height:16px;accent-color:#1f8a4c;flex:none;}
+  .pi .tx{flex:1;line-height:1.45;}
+  .pi.done .tx{color:var(--ink-muted);}
+  .pi .ck{color:#1f8a4c;font-weight:800;width:16px;flex:none;}
+  .pi .who{font-size:11.5px;color:var(--ink-2);background:#f2f1ec;border-radius:6px;padding:1px 7px;white-space:nowrap;}
+  .pi .when{font-size:11.5px;color:var(--ink-muted);white-space:nowrap;min-width:84px;text-align:right;}
+  .pi.hecho .tx{text-decoration:line-through;color:var(--ink-muted);}
+  .pg{font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink-muted);margin:14px 0 2px;}
+  .pstats{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .pstats div{background:var(--surface-1);border:1px solid var(--grid);border-radius:10px;padding:8px 14px;font-size:12.5px;}
+  .pstats b{font-size:18px;display:block;}
+  @media (max-width:900px){ .tabs a{padding:0 9px;} .pi{flex-wrap:wrap;} .pi .when{min-width:0;text-align:left;} }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand"><div class="logo">D</div> Medicina Dermatológica</div>
-  <div class="ver">Asistente de WhatsApp · versión 1 · octubre 2026</div>
+  <nav class="tabs"><a data-t="manual" class="on">Manual</a><a data-t="pend">Pendientes</a></nav>
+  <div class="ver">Asistente de WhatsApp · versión 1.2 · 14 de octubre de 2026</div>
 </div>
 
 <div class="wrap">
+<div id="tab-manual">
   <div class="pagehead">
     <h1>Así funciona el asistente de WhatsApp</h1>
     <div class="sub">Recorrido de cada conversación tal como la ve el paciente y como le llega a Brenda. Los botones azules dentro del teléfono son interactivos: tóquelos para seguir el camino. Los nombres y citas son de ejemplo.</div>
@@ -127,37 +151,47 @@
 
   <div class="facts">
     <div class="fact"><div class="k">Pacientes escriben a</div><div class="v">662 411 2031</div><div class="d">WhatsApp Business de la clínica. Aquí contesta el asistente, 24/7.</div></div>
-    <div class="fact"><div class="k">Avisos y resumen llegan a</div><div class="v">WhatsApp de Brenda</div><div class="d">WhatsApp de Brenda. Solicitudes al momento y resumen diario a las 7:00 pm.</div></div>
+    <div class="fact"><div class="k">Avisos y resumen llegan a</div><div class="v">WhatsApp de Brenda</div><div class="d">WhatsApp de Brenda. Solicitudes al momento y resumen de estética a las 7:00 pm. Por ahora también recibe lo de estética.</div></div>
   </div>
 
   <div class="rules">
     <div class="rule si"><h3>Lo que hace</h3><ul>
-      <li>Da precios con la tabla oficial de la doctora.</li>
+      <li>Da precios con la tabla oficial de la doctora (vigencia: hoy + 15 días).</li>
       <li>Envía el folleto de Soprano.</li>
-      <li>Toma solicitudes de valoración: hace 3 preguntas (nombre, cuándo le acomoda y motivo) y le manda el resumen a Brenda a su WhatsApp.</li>
-      <li>Pide confirmar la cita un día antes a las 8:00 am y la recuerda el mismo día a las 9:00 am.</li>
-      <li>Captura cambios y cancelaciones y se los manda a Brenda a su WhatsApp al momento; a las 7:00 pm le manda el resumen de las citas del día siguiente.</li>
-      <li>Se calla cuando Brenda contesta desde el teléfono de la clínica.</li>
+      <li>Toma solicitudes de valoración y de otros servicios (facial, Hydrafacial, depilación láser): hace 3 preguntas y manda el resumen por WhatsApp.</li>
+      <li><b>Citas de la doctora:</b> pide confirmar el mismo día a las 8:00 am.</li>
+      <li><b>Citas de estética:</b> pide confirmar un día antes a las 8:00 am, recuerda el mismo día a las 9:00 am y manda el resumen a las 7:00 pm.</li>
+      <li>Captura cambios y cancelaciones y avisa al momento por WhatsApp.</li>
+      <li>Se calla 4 horas en ese chat si alguien del equipo contesta desde el teléfono de la clínica.</li>
+      <li>Si un aviso no le puede llegar a Brenda, lo reintenta solo y le avisa a Jacobo.</li>
     </ul></div>
     <div class="rule no"><h3>Lo que NO hace</h3><ul>
-      <li>No mueve ni borra citas del calendario: los cambios los hace Brenda.</li>
-      <li>No agenda solo: Brenda revisa su agenda, le escribe al paciente desde el teléfono de la clínica para proponerle fecha y la anota en su calendario, como hoy.</li>
+      <li>No mueve ni borra citas del calendario: los cambios los hace el equipo.</li>
+      <li>No agenda solo: Brenda revisa la agenda, le escribe al paciente desde su WhatsApp para proponerle fecha y la anota en el calendario, como hoy.</li>
       <li>No inventa precios ni cotiza lo que requiere valoración.</li>
       <li>No cancela nada por silencio ni por una respuesta ambigua.</li>
       <li>No da información médica: eso lo ve la doctora.</li>
     </ul></div>
     <div class="rule oro"><h3>Regla de oro: el WhatsApp de la clínica</h3>
-      <p>El asistente contesta en el mismo número que ya usan (662 411 2031). Los pacientes, los chats y el número no cambian. Lo único que cambia es la aplicación: ese número tiene que estar en <b>WhatsApp Business</b> (la app verde con la "B"), no en WhatsApp normal.</p>
+      <p>El asistente contesta en el mismo número que ya usan (662 411 2031), en <b>WhatsApp Business</b> (la app verde con la "B") del iPhone de la clínica. Los pacientes, los chats y el número no cambian. Para que siga funcionando:</p>
       <ul style="margin-top:8px">
-        <li><b>Si hoy ya usan WhatsApp Business</b> en ese teléfono: no hay que hacer nada.</li>
-        <li><b>Si hoy usan WhatsApp normal:</b> en la instalación se pasa el número a WhatsApp Business en el mismo teléfono. Los chats se conservan. Después se desinstala WhatsApp normal de ese teléfono.</li>
-        <li><b>A partir de ahí, nunca</b> volver a registrar el 662 411 2031 en WhatsApp normal, en ningún teléfono. Si se registra, Meta desconecta el asistente al instante y reconectarlo toma de 1 a 3 días.</li>
-        <li>Abrir WhatsApp Business en ese teléfono al menos una vez al día (si lo usan para trabajar, ya está cubierto).</li>
-        <li>Si WhatsApp muestra un aviso para cambiar de app, verificar el número o "registrar otro número": no aceptar y avisar a Jacobo.</li>
+        <li><b>Nunca</b> instalar WhatsApp normal (la app verde <i>sin</i> la "B") en ese iPhone, ni registrar el 662 411 2031 en WhatsApp normal en ningún teléfono. Si pasa, Meta desconecta el asistente al instante y reconectarlo toma de 1 a 3 días.</li>
+        <li><b>Actualizaciones automáticas encendidas:</b> iPhone → Ajustes → App Store → Actualizaciones de apps. Actualizar WhatsApp Business solo desde la App Store.</li>
+        <li><b>No</b> desinstalar, reinstalar ni pasar WhatsApp Business a otro teléfono sin avisar antes a Jacobo.</li>
+        <li>Si WhatsApp pide <b>verificar el número, un código por SMS o llamada</b>, o "cambiar de app": <b>no continuar</b> y avisar a Jacobo.</li>
+        <li>En WhatsApp Business → Ajustes → Cuenta → <b>Plataforma empresarial</b> aparece la conexión del asistente: <b>no desconectarla</b>.</li>
+        <li>Abrir WhatsApp Business todos los días (si lo usan para trabajar, ya está cubierto). Si pasan ~14 días sin abrirlo, Meta desconecta el asistente.</li>
+      </ul></div>
+    <div class="rule oro"><h3>Lo que verán los pacientes y qué hacer si algo falla</h3>
+      <ul>
+        <li>Desde la conexión, los pacientes verán una vez el aviso de WhatsApp: <i>"Esta empresa usa un servicio seguro de Meta para administrar este chat"</i>. Es normal y no hay que hacer nada.</li>
+        <li>Si el asistente no contesta o contesta algo raro, el equipo atiende como siempre desde WhatsApp Business. En cuanto alguien del equipo escribe en un chat, el asistente se calla 4 horas en ese chat.</li>
+        <li>Si el asistente se cae, a Jacobo le llega una alerta automática por correo. Si un aviso no puede llegarle a Brenda, el asistente lo reintenta y le avisa a Jacobo.</li>
+        <li>Para cualquier duda o falla: avisar a Jacobo Urquides · jacobourquides.com.</li>
       </ul></div>
   </div>
 
-  <details class="testnotes"><summary>13 · Notas de prueba (solo Jacobo) — clic para abrir / cerrar</summary>
+  <details class="testnotes"><summary>★ Notas de prueba (solo Jacobo) — clic para abrir / cerrar</summary>
   <div class="tn">
     <h5>1 · Preparar (una vez por sesión)</h5>
     <p>Abrir 3 terminales. En las tres:</p><div class="cmd"><code>cd ~/Projects/bot-dermatologia</code><button class="cp" onclick="cp(this)">Copiar</button></div>
@@ -216,6 +250,13 @@
 
   <div class="footer">Precios vigentes al 24 de agosto de 2026, según la tabla oficial de la Dra. Bonnafoux. Para cambiar precios, textos o el horario de atención, avisar a Jacobo Urquides · jacobourquides.com.</div>
 </div>
+<div id="tab-pend" style="display:none">
+  <div class="pagehead"><h1>Pendientes del arranque</h1><div class="sub">Arranque estimado: viernes 16 o lunes 19 de octubre, en cuanto Meta apruebe las plantillas. El número de la clínica ya está en WhatsApp Business (no hay que esperar los 7 días). Lo terminado está arriba (colapsado); lo que falta, abajo por etapa. Las casillas se guardan solo en este navegador.</div></div>
+  <div class="pstats" id="pstats"></div>
+  <details class="pbox"><summary>✓ Terminado <span class="cnt">24</span></summary><ul class="pl"><li class="pi done"><span class="ck">✓</span><span class="tx">Prueba de aceptación completa: 12 casos aprobados desde el celular</span><span class="when">29-sep</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Bot en producción (Railway) con firma de seguridad y token permanente</span><span class="when">30-sep</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Folleto de Soprano y orden correcto (folleto y después botones)</span><span class="when">6-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Conexión con WhatsApp Business validada con el chip de prueba</span><span class="when">6-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Dualhook con suscripción activa; ruta secreta y token rotados</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Railway en plan Hobby</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Números confirmados: clínica 662 411 2031 y WhatsApp de Brenda</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Cotización v2 ($10,000 + IVA; fundadora $500 + IVA)</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Manual del asistente y pruebas en sandbox (confirmación, reagendar, valoración, resumen)</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Junta con la doctora: demo y feedback</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Valoración: solo "Hablar con Brenda" en la pregunta 1; nuevo cierre</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Textos: Brenda escribe desde su WhatsApp personal</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Precios: axilas $7,500, MTone requiere valoración, vigencia hoy + 15 días</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Nueva opción del menú: Otros servicios (estética)</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Reglas por calendario: doctora confirma el mismo día 8:00; estética 24 h + día + resumen</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Aviso a Brenda de citas de la doctora sin confirmación enviada</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Base de datos real (Supabase): un reinicio ya no borra citas, pausas ni avisos</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Saludos ("hola", "menú") siempre regresan al menú; pasos sin actividad se cierran a las 2 h</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Conexión de la línea al asistente (puerta lateral de Dualhook) probada con el chip</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Lectura de calendarios con la cuenta de Google del bot (probada con calendario de prueba)</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Línea de la clínica revisada: WhatsApp Business en iPhone, en uso desde antes de 2023</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Credenciales de WhatsApp cambiadas</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Avisos a Brenda con reintentos y alerta a Jacobo si no se entregan</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Monitor automático: correo a Jacobo si el asistente se cae</span><span class="when">14-oct</span></li></ul></details>
+  <details class="pbox open" open><summary>Falta <span class="cnt" id="pcnt">16</span></summary><h4 class="pg">Sesión del jueves 15-oct · 1:00 pm</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r0"><span class="tx">Conectar el 662 411 2031 al asistente (código QR desde el iPhone; nunca SMS)</span></label><span class="who">Jacobo + Brenda</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r1"><span class="tx">Someter los mensajes automáticos (plantillas) a Meta en la cuenta nueva</span></label><span class="who">Jacobo</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r2"><span class="tx">Método de pago de WhatsApp con la tarjeta de la clínica</span></label><span class="who">Dra. / Brenda</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r3"><span class="tx">Compartir los 3 calendarios (doctora y 2 de estética) con el correo del bot, en solo lectura</span></label><span class="who">Dueñas</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r4"><span class="tx">Aceptar la cotización por escrito y fijar fecha del anticipo</span></label><span class="who">Dra.</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r5"><span class="tx">Quién cubre los avisos cuando Brenda no está; número para estética</span></label><span class="who">Clínica</span><span class="when">15-oct</span></li></ul><h4 class="pg">Antes del arranque</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r6"><span class="tx">Meta aprueba los mensajes automáticos (~1 día)</span></label><span class="who">Meta</span><span class="when">16-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r7"><span class="tx">Encender la lectura real de los 3 calendarios y verificarla</span></label><span class="who">Jacobo</span><span class="when">15–16 oct</span></li><li class="pi"><label><input type="checkbox" data-k="r8"><span class="tx">Resumen semanal de resultados por WhatsApp (Jacobo, Brenda y la Dra.)</span></label><span class="who">Jacobo</span><span class="when">Antes del arranque</span></li><li class="pi"><label><input type="checkbox" data-k="r9"><span class="tx">Prueba completa en la línea real</span></label><span class="who">Jacobo</span><span class="when">Antes del arranque</span></li></ul><h4 class="pg">Arranque</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r10"><span class="tx">Encender el asistente en la línea real y los mensajes automáticos</span></label><span class="who">Jacobo</span><span class="when">16 o 19 oct</span></li><li class="pi"><label><input type="checkbox" data-k="r11"><span class="tx">Capacitación de 30 min con este manual</span></label><span class="who">Jacobo + Brenda</span><span class="when">Día del arranque</span></li><li class="pi"><label><input type="checkbox" data-k="r12"><span class="tx">Anticipo; piloto de 2 semanas con reporte final; segundo pago al terminar</span></label><span class="who">Dra.</span><span class="when">Día del arranque</span></li></ul><h4 class="pg">Seguridad y administración</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r13"><span class="tx">Preguntar a Dualhook por firma propia o IPs fijas para la línea real</span></label><span class="who">Jacobo</span><span class="when">Esta semana</span></li><li class="pi"><label><input type="checkbox" data-k="r14"><span class="tx">Actualizar la tarjeta de Dualhook (vence 12/2026)</span></label><span class="who">Jacobo</span><span class="when">Antes de dic</span></li><li class="pi"><label><input type="checkbox" data-k="r15"><span class="tx">Quitar las notas de prueba antes de mandar el manual a la clínica</span></label><span class="who">Jacobo</span><span class="when">Antes de enviar</span></li></ul></details>
+</div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -235,15 +276,16 @@ const FLOWS = {
       {who:'list', head:'¿Qué necesita?', rows:[
         {t:'💰 Precios y servicios', d:'Consulta, tratamientos y estética'},
         {t:'📅 Agendar valoración', d:'Primera vez con la doctora', goto:'valoracion'},
+        {t:'✨ Otros servicios', d:'Agendar facial, Hydrafacial o depilación láser', goto:'otros'},
         {t:'🗓 Mi cita', d:'Confirmar, cambiar o cancelar', goto:'micita'},
         {t:'💬 Hablar con Brenda', d:'Le atiende nuestra coordinadora', goto:'handoff'}]},
       {who:'user', text:'💰 Precios y servicios', time:'4:03 pm'},
-      {who:'bot', text:'Estos son nuestros servicios:<br><br><b>🩺 Consulta</b><br>Consulta dermatológica — $1,200<br>Incluye valoración de: acné · manchas y melasma · lunares · verrugas · caída del cabello · problemas de uñas<br><br><b>🔬 Procedimientos dermatológicos</b><br>Retiro de verrugas, lunares o quistes — requiere valoración previa (el procedimiento y el costo se determinan en consulta)<br><br><b>✨ Medicina estética</b><br>Toxina botulínica facial — $2,200 a $6,000<br>Toxina botulínica en axilas (hiperhidrosis) — $7,000<br>Radiesse — $8,500<br>HarmonyCa — $16,000<br><br><b>💧 Tratamientos faciales</b><br>Hydrafacial — $2,400 · pregunte por promociones vigentes<br>Facial de limpieza profunda — $900<br><br><b>⚡ Tecnología láser / luz</b><br>Soprano (depilación) — se cotiza en consulta; con gusto le compartimos la información<br>MTone (luz pulsada / Erbium Glass), rojeces y cicatrices — $2,500 a $4,500<br><br>Más información: medicinadermatologica.com/servicios<br><br>Precios vigentes al 24-ago-2026', time:'4:03 pm'},
+      {who:'bot', text:'Estos son nuestros servicios:<br><br><b>🩺 Consulta</b><br>Consulta dermatológica — $1,200<br>Incluye valoración de: acné · manchas y melasma · lunares · verrugas · caída del cabello · problemas de uñas<br><br><b>🔬 Procedimientos dermatológicos</b><br>Retiro de verrugas, lunares o quistes — requiere valoración previa (el procedimiento y el costo se determinan en consulta)<br><br><b>✨ Medicina estética</b><br>Toxina botulínica facial — $2,200 a $6,000<br>Toxina botulínica en axilas (hiperhidrosis) — $7,500<br>Radiesse — $8,500<br>HarmonyCa — $16,000<br><br><b>💧 Tratamientos faciales</b><br>Hydrafacial — $2,400 · pregunte por promociones vigentes<br>Facial de limpieza profunda — $900<br><br><b>⚡ Tecnología láser / luz</b><br>Soprano (depilación) — se cotiza en consulta; con gusto le compartimos la información<br>MTone (luz pulsada / Erbium Glass), rojeces y cicatrices — requiere valoración previa (el procedimiento y el costo se determinan en consulta)<br><br>Más información: medicinadermatologica.com/servicios<br><br>Precios vigentes al 29 de octubre de 2026', time:'4:03 pm'},
       {who:'bot', text:'¿Le comparto la información de Soprano o desea agendar su valoración?', time:'4:03 pm',
        btns:[{l:'Info de Soprano', goto:'soprano'},{l:'Agendar valoración', goto:'valoracion'},{l:'Menú principal', goto:'menu'}]},
     ],
     notes:`<div class="flownote"><h4>Qué resuelve</h4><p>La mayoría de los mensajes son personas preguntando precios. El asistente las atiende al instante, a cualquier hora, sin que nadie del equipo tenga que contestar.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Los precios salen de la tabla oficial de la doctora. Si cambia un precio, se actualiza la tabla y el asistente lo usa desde ese momento.</li><li>Lo que requiere valoración no se cotiza: el asistente lo dice y ofrece agendar.</li><li>Los rangos (toxina facial, MTone) se dan como rango; el precio exacto se define en consulta.</li></ul></div>`
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Los precios salen de la tabla oficial de la doctora. Si cambia un precio, se actualiza la tabla y el asistente lo usa desde ese momento.</li><li>Lo que requiere valoración no se cotiza: el asistente lo dice y ofrece agendar.</li><li>La fecha de vigencia se calcula sola: siempre es el día de hoy más 15 días.</li></ul></div>`
   },
   soprano: {
     chip:'Soprano', title:'2 · Información de Soprano',
@@ -257,114 +299,141 @@ const FLOWS = {
     <div class="flownote"><h4>Cómo funciona</h4><ul><li>El asistente nunca escribe precios de Soprano: el folleto es la única fuente.</li><li>Si la clínica cambia el folleto, basta con mandar la imagen nueva para reemplazarlo.</li></ul></div>`
   },
   valoracion: {
-    chip:'Agendar valoración', title:'3 · Agendar valoración (paciente nuevo)',
+    chip:'Agendar valoración', title:'3 · Agendar valoración (primera vez con la doctora)',
     msgs:[
       {who:'user', text:'📅 Agendar valoración', time:'4:05 pm'},
       {who:'bot', text:'Con mucho gusto. Le hago tres preguntas rápidas para pasarle su solicitud a Brenda, nuestra coordinadora. 1 de 3: ¿a nombre de quién agendamos la valoración?', time:'4:05 pm',
-       btns:[{l:'Mejor no'},{l:'Hablar con Brenda', goto:'handoff'}]},
+       btns:[{l:'Hablar con Brenda', goto:'handoff'}]},
       {who:'user', text:'Ana Karen Villaseñor', time:'4:05 pm'},
       {who:'bot', text:'2 de 3: ¿qué días y en qué horario le acomodan? Puede escribirlo como guste (por ejemplo: "martes o jueves por la tarde").', time:'4:05 pm'},
       {who:'user', text:'entre semana en la mañana', time:'4:06 pm'},
       {who:'bot', text:'3 de 3: ¿cuál es el motivo de su consulta? Con una frase basta (por ejemplo: "una mancha en la cara").', time:'4:06 pm'},
       {who:'user', text:'manchas en la cara', time:'4:06 pm'},
-      {who:'bot', text:'Listo. Esto es lo que le paso a Brenda:<br><br><b>Nombre:</b> Ana Karen Villaseñor<br><b>Cuándo le acomoda:</b> entre semana en la mañana<br><b>Motivo:</b> manchas en la cara<br><br>Ella le confirma la fecha por este mismo medio. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm.', time:'4:06 pm'},
+      {who:'bot', text:'Listo. Esto es lo que le paso a Brenda:<br><br><b>Nombre:</b> Ana Karen Villaseñor<br><b>Cuándo le acomoda:</b> entre semana en la mañana<br><b>Motivo:</b> manchas en la cara<br><br>Brenda, nuestra coordinadora, le escribirá por WhatsApp para confirmarle la fecha. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm. Le agradecemos su paciencia.', time:'4:06 pm'},
       {who:'sys', text:'En ese momento Brenda recibe el aviso en su WhatsApp → ver "Avisos a Brenda"'},
     ],
     notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Regla de la clínica: la primera vez siempre pasa por Brenda. El asistente no agenda; junta los datos y se los entrega ordenados para que ella proponga la fecha.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Tres preguntas cortas y numeradas, en el mismo chat.</li><li>El paciente puede salirse en cualquier momento con "Mejor no" (no se registra nada) o pedir hablar con Brenda.</li><li>Si la misma persona vuelve a pedir valoración el mismo día, no se duplica el aviso.</li></ul></div>
-    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Recibe el aviso, revisa su agenda y le escribe al paciente desde el teléfono de la clínica para proponerle fecha.</p></div>`
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Tres preguntas cortas y numeradas, en el mismo chat.</li><li>En la primera pregunta el paciente puede pedir hablar con Brenda; la segunda y la tercera son solo de escribir.</li><li>Si deja de contestar a la mitad, la conversación se cierra sola y no se manda nada a medias.</li><li>Si la misma persona vuelve a pedir valoración el mismo día, no se duplica el aviso.</li></ul></div>
+    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Recibe el aviso, revisa la agenda y le escribe al paciente <b>desde su WhatsApp</b> para proponerle fecha.</p></div>`
+  },
+  otros: {
+    chip:'Otros servicios', title:'4 · Agendar otros servicios (facial, Hydrafacial, depilación láser)',
+    msgs:[
+      {who:'user', text:'✨ Otros servicios', time:'5:10 pm'},
+      {who:'bot', text:'Con mucho gusto. Le hago tres preguntas rápidas para pasarle su solicitud al equipo de estética. 1 de 3: ¿a nombre de quién agendamos?', time:'5:10 pm',
+       btns:[{l:'Hablar con Brenda', goto:'handoff'}]},
+      {who:'user', text:'María Ozuna', time:'5:10 pm'},
+      {who:'bot', text:'2 de 3: ¿qué días y en qué horario le acomodan? Puede escribirlo como guste (por ejemplo: "martes o jueves por la tarde").', time:'5:10 pm'},
+      {who:'user', text:'sábado por la mañana', time:'5:11 pm'},
+      {who:'bot', text:'3 de 3: ¿qué servicio le interesa? Puede escribirlo como guste (por ejemplo: "facial", "Hydrafacial" o "depilación láser").', time:'5:11 pm'},
+      {who:'user', text:'Hydrafacial', time:'5:11 pm'},
+      {who:'bot', text:'Listo. Esto es lo que le paso al equipo de estética:<br><br><b>Nombre:</b> María Ozuna<br><b>Cuándo le acomoda:</b> sábado por la mañana<br><b>Servicio:</b> Hydrafacial<br><br>Le pasamos su solicitud al equipo de estética; le escribirán por WhatsApp para confirmarle la fecha. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm. Le agradecemos su paciencia.', time:'5:11 pm'},
+      {who:'sys', text:'El aviso llega al número de avisos de estética (por ahora, el WhatsApp de Brenda)'},
+    ],
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Los servicios de estética no necesitan valoración con la doctora. El paciente deja su solicitud y el equipo de estética le propone fecha.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Mismas tres preguntas que la valoración, pero la tercera pregunta qué servicio quiere.</li><li>El aviso va al número de avisos de estética. Mientras las chicas no tengan número propio, le llega a Brenda.</li><li>Cuando las chicas tengan número, solo se cambia ese dato; no hay que tocar nada más.</li></ul></div>`
   },
   confirm: {
-    chip:'Confirmación 24 h', title:'4 · Confirmación un día antes',
+    chip:'Confirmación 24 h (estética)', title:'5 · Confirmación un día antes (solo citas de estética)',
     msgs:[
-      {who:'sys', text:'Mensaje automático · un día antes de la cita, 8:00 am'},
-      {who:'bot', text:'Hola Lupita Ferrel, le saludamos del consultorio de la Dra. Mireille Bonnafoux, Medicina Dermatológica. Le recordamos que tiene cita mañana martes 20 de octubre a las 10:00 am. ¿Nos confirma su asistencia, por favor? Si necesita mover o cancelar su cita, elija una opción y nuestra coordinadora le dará seguimiento.<span class="foot">Medicina Dermatológica · Hermosillo</span>', time:'8:00 am',
+      {who:'sys', text:'Mensaje automático · un día antes de la cita, 8:00 am · solo calendarios de estética'},
+      {who:'bot', text:'Hola María Ozuna, le saludamos del consultorio de la Dra. Mireille Bonnafoux, Medicina Dermatológica. Le recordamos que tiene cita mañana sábado 18 de octubre a las 10:00 am. ¿Nos confirma su asistencia, por favor? Si necesita mover o cancelar su cita, elija una opción y nuestra coordinadora le dará seguimiento.<span class="foot">Medicina Dermatológica · Hermosillo</span>', time:'8:00 am',
        btns:[{l:'Confirmar'},{l:'Reagendar', goto:'reagendar'},{l:'Cancelar', goto:'cancelar'}]},
       {who:'user', text:'Confirmar', time:'8:24 am'},
-      {who:'bot', text:'Gracias por confirmar. Le esperamos en su cita del martes 20 de octubre a las 10:00 am.', time:'8:24 am'},
+      {who:'bot', text:'Gracias por confirmar. Le esperamos en su cita del sábado 18 de octubre a las 10:00 am.', time:'8:24 am'},
       {who:'sys', text:'Si en vez de tocar el botón escribe "sí", "simón", "va" o "claro", también cuenta como confirmación'},
     ],
-    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Hoy Brenda confirma una por una, a veces hasta las 8:30 pm. El asistente lo hace por ella y solo le reporta las excepciones.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Cada mañana lee las citas del día siguiente en el calendario de la clínica, sin modificarlo.</li><li>Manda el recordatorio con tres botones: Confirmar, Reagendar, Cancelar.</li><li>Si el número del paciente no tiene WhatsApp, lo marca como 📵 en el resumen para que Brenda le llame.</li><li>Un botón tocado dos veces no registra doble respuesta.</li></ul></div>`
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Confirmar una por una las citas de estética ya no depende de nadie del equipo. El asistente lo hace y solo reporta las excepciones.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Cada mañana lee las citas del día siguiente en los <b>dos calendarios de estética</b>, sin modificarlos.</li><li>Las citas de la doctora <b>no</b> reciben este mensaje (ver flujo 6).</li><li>Si el número del paciente no tiene WhatsApp, lo marca como 📵 en el resumen para que le llamen.</li><li>Un botón tocado dos veces no registra doble respuesta.</li></ul></div>`
+  },
+  confhoy: {
+    chip:'Confirmación del día (doctora)', title:'6 · Confirmación el mismo día (solo citas de la doctora)',
+    msgs:[
+      {who:'sys', text:'Mensaje automático · el día de la cita, 8:00 am · solo calendario de la Dra. Mireille'},
+      {who:'bot', text:'Hola Lupita Ferrel, le saludamos del consultorio de la Dra. Mireille Bonnafoux, Medicina Dermatológica. Le recordamos que tiene cita HOY a las 11:30 am. ¿Nos confirma su asistencia, por favor? Si necesita mover o cancelar su cita, elija una opción y nuestra coordinadora le dará seguimiento.<span class="foot">Medicina Dermatológica · Hermosillo</span>', time:'8:00 am',
+       btns:[{l:'Confirmar'},{l:'Reagendar', goto:'reagendar'},{l:'Cancelar', goto:'cancelar'}]},
+      {who:'user', text:'Confirmar', time:'8:15 am'},
+      {who:'bot', text:'Gracias por confirmar. Le esperamos en su cita de hoy a las 11:30 am.', time:'8:15 am'},
+    ],
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Brenda reacomoda la agenda de la doctora el día anterior. Por eso a estas pacientes no se les confirma un día antes: se les confirma la misma mañana, cuando la agenda ya está firme.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>A las 8:00 am lee las citas de hoy del calendario de la doctora (sus citas empiezan a las 10:00).</li><li>Un solo mensaje ese día: no reciben además el recordatorio de las 9:00.</li><li>No entran al resumen de las 7 pm.</li><li>Si alguna cita se queda sin mensaje (sin teléfono, sin WhatsApp), Brenda recibe a las 8:00 un aviso "Citas de hoy sin confirmación enviada" para llamarles.</li><li>"Mi cita" ve la cita desde el día anterior, aunque todavía no se haya mandado el mensaje.</li></ul></div>
+    <div class="flownote"><h4>Pendiente</h4><p>Este mensaje es una plantilla nueva que Meta tiene que aprobar. Hasta que la aprueben, las pacientes de la doctora no reciben nada automático.</p></div>`
   },
   reagendar: {
-    chip:'Reagendar', title:'5 · Reagendar una cita',
+    chip:'Reagendar', title:'7 · Reagendar una cita',
     msgs:[
       {who:'user', text:'Reagendar', time:'8:24 am'},
       {who:'bot', text:'¿Qué día y horario le acomoda mejor? Puede escribirlo como guste (por ejemplo: "la próxima semana por la tarde").', time:'8:24 am'},
       {who:'user', text:'el jueves o viernes después de las 4', time:'8:26 am'},
       {who:'bot', text:'Gracias, ya tenemos sus preferencias. Nuestra coordinadora le propondrá fecha; su cita actual sigue en el calendario hasta entonces.', time:'8:26 am'},
-      {who:'sys', text:'Brenda recibe el aviso con la preferencia del paciente → ver "Avisos a Brenda"'},
+      {who:'sys', text:'Aviso a Brenda (citas de la doctora) o al número de estética (citas de estética)'},
     ],
     notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Un cambio de cita deja de ser una llamada: el paciente deja su preferencia y a Brenda le llega todo junto.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>La cita <b>no se mueve sola</b>: sigue en el calendario hasta que Brenda la cambie.</li><li>Lo que escribe el paciente le llega a Brenda tal cual, sin interpretarlo.</li></ul></div>
-    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Mueve la cita en su calendario y le confirma la nueva fecha al paciente desde el teléfono de la clínica.</p></div>`
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>La cita <b>no se mueve sola</b>: sigue en el calendario hasta que alguien del equipo la cambie.</li><li>Lo que escribe el paciente llega tal cual, sin interpretarlo.</li><li>El aviso va según el calendario de la cita: doctora → Brenda; estética → número de estética.</li></ul></div>
+    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Mueve la cita en el calendario y le confirma la nueva fecha al paciente desde su WhatsApp.</p></div>`
   },
   cancelar: {
-    chip:'Cancelar', title:'6 · Cancelar una cita',
+    chip:'Cancelar', title:'8 · Cancelar una cita',
     msgs:[
       {who:'user', text:'Cancelar', time:'8:24 am'},
-      {who:'bot', text:'¿Quiere cancelar su cita del martes 20 de octubre a las 10:00 am? Responda sí o no, por favor.', time:'8:24 am'},
+      {who:'bot', text:'¿Quiere cancelar su cita del sábado 18 de octubre a las 10:00 am? Responda sí o no, por favor.', time:'8:24 am'},
       {who:'user', text:'si', time:'8:25 am'},
       {who:'bot', text:'Quedó registrada su solicitud; nuestra coordinadora le dará seguimiento. Su cita sigue en el calendario hasta entonces.', time:'8:25 am'},
-      {who:'sys', text:'Brenda recibe el aviso de cancelación → ver "Avisos a Brenda"'},
+      {who:'sys', text:'Aviso de cancelación según el calendario de la cita'},
     ],
-    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Las cancelaciones llegan con anticipación y a tiempo para que Brenda llene el espacio.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Cancelar <b>siempre</b> pide confirmación explícita: un toque por error no cancela nada.</li><li>Si el paciente contesta "no", el asistente le vuelve a preguntar si confirma su asistencia.</li><li>El calendario no se toca: la cita se libera cuando Brenda la quita.</li></ul></div>`
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Las cancelaciones llegan a tiempo para que el equipo llene el espacio.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Cancelar <b>siempre</b> pide confirmación explícita: un toque por error no cancela nada.</li><li>Si el paciente contesta "no", el asistente le vuelve a preguntar si confirma su asistencia.</li><li>El calendario no se toca: la cita se libera cuando alguien del equipo la quita.</li></ul></div>`
   },
   reafirma: {
-    chip:'Recordatorio del día', title:'7 · Recordatorio el mismo día',
+    chip:'Recordatorio del día (estética)', title:'9 · Recordatorio el mismo día (solo citas de estética)',
     msgs:[
-      {who:'sys', text:'Mensaje automático · el día de la cita, 9:00 am'},
-      {who:'bot', text:'Hola Lupita Ferrel, le saludamos de Medicina Dermatológica. Solo para reafirmar: su cita con nosotros es HOY a las 10:00 am. Le esperamos en el consultorio. Si se le presenta algún imprevisto, respóndanos por este medio, por favor.<span class="foot">Medicina Dermatológica · Hermosillo</span>', time:'9:00 am'},
+      {who:'sys', text:'Mensaje automático · el día de la cita, 9:00 am · solo calendarios de estética'},
+      {who:'bot', text:'Hola María Ozuna, le saludamos de Medicina Dermatológica. Solo para reafirmar: su cita con nosotros es HOY a las 10:00 am. Le esperamos en el consultorio. Si se le presenta algún imprevisto, respóndanos por este medio, por favor.<span class="foot">Medicina Dermatológica · Hermosillo</span>', time:'9:00 am'},
       {who:'sys', text:'Si responde algo como "ya no voy a poder llegar":'},
       {who:'user', text:'ya no voy a poder llegar', time:'9:12 am'},
-      {who:'bot', text:'Entendido. Le aviso a Brenda, nuestra coordinadora, para que se comunique con usted sobre su cita. Su cita sigue en el calendario hasta entonces. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm.', time:'9:12 am'},
+      {who:'bot', text:'Entendido. Le aviso a Brenda, nuestra coordinadora, para que le escriba por WhatsApp sobre su cita. Su cita sigue en el calendario hasta entonces. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm.', time:'9:12 am'},
     ],
-    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Lo pidió la doctora: un recordatorio corto el mismo día para bajar las faltas.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Solo se manda a citas que siguen en pie (no a las canceladas ni a las que ya pasaron).</li><li>Si el paciente avisa que no llega, Brenda recibe un aviso de "posible inasistencia" para llamarle.</li></ul></div>`
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Un recordatorio corto el mismo día para bajar las faltas en estética.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Solo se manda a citas de estética que siguen en pie (no a las canceladas ni a las que ya pasaron).</li><li>Las citas de la doctora no lo reciben: ellas tienen su propia confirmación de las 8:00 (flujo 6).</li><li>Si el paciente avisa que no llega, se manda un aviso de "posible inasistencia" para llamarle.</li></ul></div>`
   },
   micita: {
-    chip:'Mi cita (desde el menú)', title:'8 · "Mi cita" desde el menú',
+    chip:'Mi cita (desde el menú)', title:'10 · "Mi cita" desde el menú',
     msgs:[
       {who:'user', text:'🗓 Mi cita', time:'5:40 pm'},
-      {who:'bot', text:'¿Nos confirma su asistencia a su cita del martes 20 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'5:40 pm',
+      {who:'bot', text:'¿Nos confirma su asistencia a su cita del sábado 18 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'5:40 pm',
        btns:[{l:'Confirmar'},{l:'Reagendar', goto:'reagendar'},{l:'Cancelar', goto:'cancelar'}]},
       {who:'sys', text:'Si el número no tiene cita próxima registrada:'},
       {who:'bot', text:'No encontré ninguna cita próxima registrada a este número. Si ya tiene una agendada, puede platicarlo con nuestra coordinadora.', time:'5:40 pm',
        btns:[{l:'Hablar con Brenda', goto:'handoff'},{l:'Menú principal', goto:'menu'}]},
     ],
     notes:`<div class="flownote"><h4>Qué resuelve</h4><p>El paciente puede gestionar su cita cuando quiera, sin esperar el recordatorio.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Solo muestra citas del número que escribe: nadie puede ver ni cambiar la cita de otra persona.</li><li>Si ya pidió un cambio o cancelación, el asistente le dice que su solicitud está en proceso y no la duplica.</li></ul></div>`
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Solo muestra citas del número que escribe: nadie puede ver ni cambiar la cita de otra persona.</li><li>Funciona para citas de la doctora y de estética.</li><li>Si ya pidió un cambio o cancelación, el asistente le dice que su solicitud está en proceso y no la duplica.</li></ul></div>`
   },
   handoff: {
-    chip:'Hablar con Brenda', title:'9 · Hablar con Brenda',
+    chip:'Hablar con Brenda', title:'11 · Hablar con Brenda',
     msgs:[
       {who:'user', text:'💬 Hablar con Brenda', time:'6:12 pm'},
-      {who:'bot', text:'Claro que sí. Le paso su conversación con Brenda, nuestra coordinadora; ella le responde por este mismo medio. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm.', time:'6:12 pm'},
+      {who:'bot', text:'Claro que sí. Le comunico con Brenda, nuestra coordinadora; ella le escribirá por WhatsApp. Horario de atención: lunes a sábado, de 9:00 am a 8:00 pm.', time:'6:12 pm'},
       {who:'sys', text:'El asistente se pausa en esta conversación · Brenda recibe aviso urgente en su WhatsApp'},
-      {who:'sys', text:'Más tarde, Brenda (o quien tenga el teléfono de la clínica) contesta desde WhatsApp Business'},
-      {who:'human', text:'¡Hola! Ya vi su mensaje. ¿En qué le puedo ayudar?', time:'6:31 pm'},
-      {who:'user', text:'quería saber si puedo llevar a mi hija a la misma cita', time:'6:33 pm'},
-      {who:'sys', text:'El asistente no interviene mientras la persona del equipo atiende'},
+      {who:'sys', text:'Brenda le escribe al paciente desde su WhatsApp personal'},
     ],
-    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>El paciente nunca sale del chat ni cambia de número. Pide hablar con alguien y la misma conversación pasa a manos del equipo.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Al pedir a Brenda, el asistente se pausa <b>4 horas</b> en esa conversación.</li><li>Si alguien del equipo contesta desde el teléfono de la clínica, el asistente también se calla en esa conversación, aunque el paciente no lo haya pedido.</li><li>Pasado ese tiempo sin actividad, el asistente vuelve a atender ese chat.</li><li>Los recordatorios automáticos de citas respetan la pausa.</li></ul></div>
-    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Recibe el aviso urgente con el último mensaje del paciente y contesta desde WhatsApp Business del teléfono de la clínica.</p></div>`
+    notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Cuando el paciente necesita a una persona, el asistente se hace a un lado y Brenda lo atiende directo.</p></div>
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Al pedir a Brenda, el asistente se pausa <b>4 horas</b> en esa conversación.</li><li>Si alguien del equipo contesta desde el teléfono de la clínica, el asistente también se calla en esa conversación.</li><li>Pasado ese tiempo sin actividad, el asistente vuelve a atender ese chat.</li><li>Los mensajes automáticos de citas respetan la pausa.</li></ul></div>
+    <div class="flownote brenda"><h4>Qué hace Brenda</h4><p>Recibe el aviso urgente con el último mensaje del paciente y le escribe <b>desde su WhatsApp</b>.</p></div>`
   },
   entiende: {
-    chip:'Si escribe en vez de tocar', title:'10 · Si el paciente escribe en vez de tocar botones',
+    chip:'Si escribe en vez de tocar', title:'12 · Si el paciente escribe en vez de tocar botones',
     msgs:[
-      {who:'bot', text:'¿Nos confirma su asistencia a su cita del martes 20 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'8:00 am',
+      {who:'bot', text:'¿Nos confirma su asistencia a su cita del sábado 18 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'8:00 am',
        btns:[{l:'Confirmar'},{l:'Reagendar', goto:'reagendar'},{l:'Cancelar', goto:'cancelar'}]},
       {who:'user', text:'simon', time:'8:12 am'},
-      {who:'bot', text:'Gracias por confirmar. Le esperamos en su cita del martes 20 de octubre a las 10:00 am.', time:'8:12 am'},
+      {who:'bot', text:'Gracias por confirmar. Le esperamos en su cita del sábado 18 de octubre a las 10:00 am.', time:'8:12 am'},
       {who:'sys', text:'Otro caso · el paciente duda'},
       {who:'user', text:'no voy a poder', time:'8:40 am'},
-      {who:'bot', text:'Entiendo que no podrá asistir a su cita del martes 20 de octubre a las 10:00 am. ¿Prefiere reagendarla o cancelarla? Si fue un error, puede confirmarla.', time:'8:40 am'},
+      {who:'bot', text:'Entiendo que no podrá asistir a su cita del sábado 18 de octubre a las 10:00 am. ¿Prefiere reagendarla o cancelarla? Si fue un error, puede confirmarla.', time:'8:40 am'},
       {who:'sys', text:'Otro caso · el asistente no entiende dos veces seguidas'},
       {who:'user', text:'mmm quién sabe', time:'8:41 am'},
-      {who:'bot', text:'Disculpe, no le entendí. ¿Nos confirma su asistencia a su cita del martes 20 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'8:41 am'},
+      {who:'bot', text:'Disculpe, no le entendí. ¿Nos confirma su asistencia a su cita del sábado 18 de octubre a las 10:00 am? También puede indicarnos si desea reagendarla o cancelarla.', time:'8:41 am'},
       {who:'user', text:'deja veo', time:'8:42 am'},
       {who:'bot', text:'Le comunico con nuestra coordinadora; en breve le atiende.', time:'8:42 am'},
     ],
@@ -372,7 +441,7 @@ const FLOWS = {
     <div class="flownote"><h4>Cómo funciona</h4><ul><li><b>Cuenta como sí:</b> sí, sip, simón, claro, ok, sale, va, dale, arre, ajá, correcto, incluso "siii".</li><li><b>Cuenta como no:</b> no, nop, nel, ya no.</li><li>Un "no voy a poder" <b>nunca</b> cancela: el asistente pregunta qué prefiere.</li><li>Si no entiende dos veces, pasa la conversación a Brenda. Nadie se queda atorado.</li></ul></div>`
   },
   silencio: {
-    chip:'Si el paciente deja de contestar', title:'11 · Si el paciente deja de contestar',
+    chip:'Si deja de contestar', title:'13 · Si el paciente deja de contestar',
     msgs:[
       {who:'bot', text:'2 de 3: ¿qué días y en qué horario le acomodan? Puede escribirlo como guste (por ejemplo: "martes o jueves por la tarde").', time:'4:05 pm'},
       {who:'sys', text:'15 minutos sin respuesta → un solo recordatorio'},
@@ -383,27 +452,31 @@ const FLOWS = {
       {who:'bot', text:'¡Hola! Le saluda el asistente de Medicina Dermatológica, consultorio de la Dra. Mireille Bonnafoux. ¿En qué le podemos ayudar?', time:'9:14 am'},
     ],
     notes:`<div class="flownote"><h4>Qué resuelve</h4><p>Ninguna conversación queda colgada y el paciente no recibe mensajes de más.</p></div>
-    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Un solo recordatorio a los 15 minutos; a las 2 horas se cierra sin escribir nada.</li><li><b>El silencio nunca cancela una cita</b>: si no contestó la confirmación, aparece como "sin respuesta" en el resumen de Brenda.</li><li>El siguiente mensaje del paciente empieza desde el saludo.</li></ul></div>`
+    <div class="flownote"><h4>Cómo funciona</h4><ul><li>Un solo recordatorio a los 15 minutos; a las 2 horas se cierra sin escribir nada.</li><li><b>El silencio nunca cancela una cita</b>: si no contestó la confirmación, aparece como "sin respuesta" en el resumen.</li><li>El siguiente mensaje del paciente empieza desde el saludo.</li></ul></div>`
   },
   avisos: {
-    chip:'Avisos a Brenda', title:'12 · Lo que le llega a Brenda', brenda:true,
+    chip:'Avisos a Brenda', title:'14 · Lo que le llega a Brenda', brenda:true,
     msgs:[
-      {who:'sys', text:'Este chat NO lo ven los pacientes: es lo que recibe Brenda en su WhatsApp'},
+      {who:'sys', text:'Este chat NO lo ven los pacientes: es lo que recibe Brenda en su WhatsApp. Por ahora también recibe lo de estética.'},
       {who:'sys', text:'① Solicitud de valoración'},
-      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Valoración nueva. Paciente: Ana Karen Villaseñor, 662XXXXXXX. Detalle: entre semana en la mañana, motivo manchas en la cara. El calendario no se ha modificado: el cambio queda pendiente de hacerse a mano. Al responder o tocar el botón se abre la conversación para ver más detalle.', time:'4:06 pm', btns:[{l:'Enterada'}]},
-      {who:'sys', text:'② Reagendar o cancelar'},
-      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Reagendar cita. Paciente: Lupita Ferrel, 662XXXXXXX. Detalle: pide reagendar su cita del martes 20 de octubre a las 10:00 am, prefiere el jueves o viernes después de las 4. El calendario no se ha modificado: el cambio queda pendiente de hacerse a mano.', time:'8:26 am', btns:[{l:'Enterada'}]},
-      {who:'sys', text:'③ Paciente pide hablar contigo · aviso inmediato, a cualquier hora'},
+      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Valoración nueva. Paciente: Ana Karen Villaseñor, 662XXXXXXX. Detalle: entre semana en la mañana, motivo manchas en la cara. El calendario no se ha modificado: el cambio queda pendiente de hacerse a mano.', time:'4:06 pm', btns:[{l:'Enterada'}]},
+      {who:'sys', text:'② Otros servicios (estética)'},
+      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Otros servicios. Paciente: María Ozuna, 662XXXXXXX. Detalle: sábado por la mañana, servicio Hydrafacial. El calendario no se ha modificado: el cambio queda pendiente de hacerse a mano.', time:'5:11 pm', btns:[{l:'Enterada'}]},
+      {who:'sys', text:'③ Reagendar o cancelar'},
+      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Reagendar cita. Paciente: Lupita Ferrel, 662XXXXXXX. Detalle: pide reagendar su cita de hoy a las 11:30 am, prefiere el jueves o viernes después de las 4. El calendario no se ha modificado: el cambio queda pendiente de hacerse a mano.', time:'8:26 am', btns:[{l:'Enterada'}]},
+      {who:'sys', text:'④ Citas de la doctora sin confirmación enviada · 8:00 am, solo si hay alguna'},
+      {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Citas de hoy sin confirmación enviada. Detalle: Jorge Salas (10:00 am) sin teléfono en el calendario, Carmen Ochoa (12:00 pm) sin WhatsApp.', time:'8:00 am', btns:[{l:'Enterada'}]},
+      {who:'sys', text:'⑤ Paciente pide hablar contigo · inmediato, a cualquier hora'},
       {who:'bot', text:'Hola Brenda, el asistente de la clínica capturó una solicitud que requiere seguimiento. Tipo: Paciente pide hablar contigo. Paciente: Paloma Duarte, 662XXXXXXX. Detalle: quería saber si puede llevar a su hija a la misma cita.', time:'6:12 pm', btns:[{l:'Enterada'}]},
-      {who:'sys', text:'④ Resumen de las citas de mañana · todos los días a las 7:00 pm'},
-      {who:'bot', text:'Hola Brenda, resumen de las citas de mañana martes 20 de octubre. Total: 12. ✅ Confirmadas: 9. 🔄 Piden reagendar: Lupita Ferrel (10:00 am). ❌ Piden cancelar: Mario Quintana (4:00 pm). 😴 Sin respuesta: Chuy Armenta (12:00 pm). 📵 Sin WhatsApp, hay que marcarles: ninguno. Los cambios de calendario quedan pendientes de gestionarse a mano.', time:'7:00 pm', btns:[{l:'Enterada'}]},
+      {who:'sys', text:'⑥ Resumen de las citas de estética de mañana · 7:00 pm'},
+      {who:'bot', text:'Hola Brenda, resumen de las citas de mañana sábado 18 de octubre. Total: 8. ✅ Confirmadas: 6. 🔄 Piden reagendar: María Ozuna (10:00 am). ❌ Piden cancelar: ninguna. 😴 Sin respuesta: Ana Ruiz (4:30 pm). 📵 Sin WhatsApp, hay que marcarles: ninguno. Los cambios de calendario quedan pendientes de gestionarse a mano.', time:'7:00 pm', btns:[{l:'Enterada'}]},
     ],
-    notes:`<div class="flownote brenda"><h4>Qué resuelve</h4><p>Brenda no tiene que estar revisando el teléfono de la clínica. Cada solicitud le llega a su WhatsApp al momento, y el resumen de las 7:00 pm reemplaza la ronda de confirmaciones de la noche: solo llama a quien no contestó.</p></div>
-    <div class="flownote brenda"><h4>Cómo funciona</h4><ul><li>Los avisos llegan del número del asistente al WhatsApp personal de Brenda.</li><li>Tocar <b>Enterada</b> solo le indica al sistema que ya lo vio; no cambia nada en el calendario.</li><li>De noche (después de las 9:00 pm) los avisos esperan a la mañana, excepto "Paciente pide hablar contigo".</li><li>Los cambios en el calendario siempre los hace Brenda a mano.</li></ul></div>
-    <div class="flownote"><h4>Pendiente de definir</h4><p>¿Quién recibe los avisos cuando Brenda está de vacaciones o enferma?</p></div>`
+    notes:`<div class="flownote brenda"><h4>Qué resuelve</h4><p>Brenda no tiene que estar revisando el teléfono de la clínica. Cada solicitud le llega a su WhatsApp al momento, y el resumen de las 7:00 pm le dice a quién llamar de las citas de estética.</p></div>
+    <div class="flownote brenda"><h4>Cómo funciona</h4><ul><li>Lo de la doctora llega a Brenda. Lo de estética llega al número de avisos de estética, que por ahora también es Brenda.</li><li>El resumen de las 7:00 pm es solo de las citas de estética; las de la doctora se confirman la misma mañana.</li><li>Tocar <b>Enterada</b> solo le indica al sistema que ya lo vio; no cambia nada en el calendario.</li><li>De noche (después de las 9:00 pm) los avisos esperan a la mañana, excepto "Paciente pide hablar contigo".</li></ul></div>
+    <div class="flownote"><h4>Pendiente de definir</h4><p>Número propio para los avisos de estética, y quién recibe los avisos cuando Brenda no está.</p></div>`
   },
 };
-const ORDER = ['menu','soprano','valoracion','confirm','reagendar','cancelar','reafirma','micita','handoff','entiende','silencio','avisos'];
+const ORDER = ['menu','soprano','valoracion','otros','confirm','confhoy','reagendar','cancelar','reafirma','micita','handoff','entiende','silencio','avisos'];
 let current = 'menu';
 
 function render(){
@@ -459,9 +532,9 @@ function render(){
       body.appendChild(wrap);
     }
   });
-  const c13=document.createElement('span'); c13.className='flowchip chip13'; c13.textContent='13 · Notas de prueba';
+  const c13=document.createElement('span'); c13.className='flowchip chip13'; c13.textContent='★ Notas de prueba';
   c13.onclick=()=>{const d=document.querySelector('.testnotes'); d.open=true; d.scrollIntoView({behavior:'smooth',block:'start'});};
-  chips.appendChild(c13);
+  if(document.querySelector('.testnotes')) chips.appendChild(c13);
   document.getElementById('flow-notes').innerHTML = `<div class="flowtitle">${f.title}</div>` + f.notes;
   body.scrollTop = 0;
 }
@@ -473,6 +546,22 @@ function toast(msg){
 }
 function cp(b){const t=b.previousElementSibling.innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='✓ Copiado';setTimeout(()=>b.textContent='Copiar',1500)}).catch(()=>{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent='Cmd+C';});}
 render();
+
+(function(){
+  const tabs=document.querySelectorAll('.tabs a');
+  function show(t){document.getElementById('tab-manual').style.display=t==='manual'?'':'none';document.getElementById('tab-pend').style.display=t==='pend'?'':'none';tabs.forEach(a=>a.classList.toggle('on',a.dataset.t===t));try{localStorage.setItem('tab',t)}catch(e){}}
+  tabs.forEach(a=>a.onclick=()=>show(a.dataset.t));
+  let st={};try{st=JSON.parse(localStorage.getItem('pend')||'{}')}catch(e){}
+  const boxes=document.querySelectorAll('#tab-pend input[type=checkbox]');
+  function stats(){const tot=boxes.length,h=[...boxes].filter(b=>b.checked).length;document.getElementById('pcnt').textContent=(tot-h);
+    const d=document.querySelectorAll('.pi.done').length;
+    document.getElementById('pstats').innerHTML=`<div><b>${d+h}</b>terminados</div><div><b>${tot-h}</b>faltan</div><div><b>16–19 oct</b>arranque</div>`;}
+  boxes.forEach(b=>{b.checked=!!st[b.dataset.k];b.closest('.pi').classList.toggle('hecho',b.checked);
+    b.onchange=()=>{st[b.dataset.k]=b.checked;b.closest('.pi').classList.toggle('hecho',b.checked);try{localStorage.setItem('pend',JSON.stringify(st))}catch(e){};stats();};});
+  stats();
+  let t='manual';try{t=localStorage.getItem('tab')||'manual'}catch(e){}
+  show(t==='pend'?'pend':'manual');
+})();
 </script>
 </body>
 </html>
