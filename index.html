@@ -132,14 +132,31 @@
   .pstats div{background:var(--surface-1);border:1px solid var(--grid);border-radius:10px;padding:8px 14px;font-size:12.5px;}
   .pstats b{font-size:18px;display:block;}
   @media (max-width:900px){ .tabs a{padding:0 9px;} .pi{flex-wrap:wrap;} .pi .when{min-width:0;text-align:left;} }
+
+  .mt{width:100%;border-collapse:collapse;background:var(--surface-1);border:1px solid var(--grid);border-radius:12px;overflow:hidden;font-size:13px;margin-bottom:18px;}
+  .mt th{background:#f2f1ec;text-align:left;padding:9px 12px;font-size:12px;color:var(--ink-2);font-weight:600;}
+  .mt td{padding:10px 12px;border-top:1px solid #f0efea;vertical-align:top;line-height:1.5;}
+  .mt td.c{white-space:nowrap;font-weight:600;text-align:right;}
+  .mt .cero{color:#1f8a4c;}
+  .mt .tag{display:inline-block;font-size:11px;background:#f2f1ec;border-radius:6px;padding:1px 7px;color:var(--ink-2);margin-left:4px;}
+  .mt tr.tot td{background:#fff8e6;font-weight:700;}
+  .mh{font-size:15px;font-weight:700;margin:22px 0 8px;}
+  .mnote{font-size:12px;color:var(--ink-2);line-height:1.6;margin-top:6px;}
+  .mcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 6px;}
+  .mcard{background:var(--surface-1);border:1px solid var(--grid);border-radius:12px;padding:12px 16px;}
+  .mcard .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink-muted);}
+  .mcard .v{font-size:20px;font-weight:700;margin-top:4px;}
+  .mcard .d{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.45;}
+  .mt-wrap{overflow-x:auto;}
+  @media (max-width:900px){ .mcards{grid-template-columns:1fr;} .mt td.c{white-space:normal;} }
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand"><div class="logo">D</div> Medicina Dermatológica</div>
-  <nav class="tabs"><a data-t="manual" class="on">Manual</a><a data-t="pend">Pendientes</a></nav>
-  <div class="ver">Asistente de WhatsApp · versión 1.2 · 14 de octubre de 2026</div>
+  <nav class="tabs"><a data-t="manual" class="on">Manual</a><a data-t="pend">Pendientes</a><a data-t="mant">Mantenimiento</a></nav>
+  <div class="ver">Asistente de WhatsApp · versión 1.3 · 15 de octubre de 2026</div>
 </div>
 
 <div class="wrap">
@@ -256,6 +273,55 @@
   <details class="pbox"><summary>✓ Terminado <span class="cnt">24</span></summary><ul class="pl"><li class="pi done"><span class="ck">✓</span><span class="tx">Prueba de aceptación completa: 12 casos aprobados desde el celular</span><span class="when">29-sep</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Bot en producción (Railway) con firma de seguridad y token permanente</span><span class="when">30-sep</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Folleto de Soprano y orden correcto (folleto y después botones)</span><span class="when">6-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Conexión con WhatsApp Business validada con el chip de prueba</span><span class="when">6-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Dualhook con suscripción activa; ruta secreta y token rotados</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Railway en plan Hobby</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Números confirmados: clínica 662 411 2031 y WhatsApp de Brenda</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Cotización v2 ($10,000 + IVA; fundadora $500 + IVA)</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Manual del asistente y pruebas en sandbox (confirmación, reagendar, valoración, resumen)</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Junta con la doctora: demo y feedback</span><span class="when">13-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Valoración: solo "Hablar con Brenda" en la pregunta 1; nuevo cierre</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Textos: Brenda escribe desde su WhatsApp personal</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Precios: axilas $7,500, MTone requiere valoración, vigencia hoy + 15 días</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Nueva opción del menú: Otros servicios (estética)</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Reglas por calendario: doctora confirma el mismo día 8:00; estética 24 h + día + resumen</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Aviso a Brenda de citas de la doctora sin confirmación enviada</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Base de datos real (Supabase): un reinicio ya no borra citas, pausas ni avisos</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Saludos ("hola", "menú") siempre regresan al menú; pasos sin actividad se cierran a las 2 h</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Conexión de la línea al asistente (puerta lateral de Dualhook) probada con el chip</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Lectura de calendarios con la cuenta de Google del bot (probada con calendario de prueba)</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Línea de la clínica revisada: WhatsApp Business en iPhone, en uso desde antes de 2023</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Credenciales de WhatsApp cambiadas</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Avisos a Brenda con reintentos y alerta a Jacobo si no se entregan</span><span class="when">14-oct</span></li><li class="pi done"><span class="ck">✓</span><span class="tx">Monitor automático: correo a Jacobo si el asistente se cae</span><span class="when">14-oct</span></li></ul></details>
   <details class="pbox open" open><summary>Falta <span class="cnt" id="pcnt">16</span></summary><h4 class="pg">Sesión del jueves 15-oct · 1:00 pm</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r0"><span class="tx">Conectar el 662 411 2031 al asistente (código QR desde el iPhone; nunca SMS)</span></label><span class="who">Jacobo + Brenda</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r1"><span class="tx">Someter los mensajes automáticos (plantillas) a Meta en la cuenta nueva</span></label><span class="who">Jacobo</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r2"><span class="tx">Método de pago de WhatsApp con la tarjeta de la clínica</span></label><span class="who">Dra. / Brenda</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r3"><span class="tx">Compartir los 3 calendarios (doctora y 2 de estética) con el correo del bot, en solo lectura</span></label><span class="who">Dueñas</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r4"><span class="tx">Aceptar la cotización por escrito y fijar fecha del anticipo</span></label><span class="who">Dra.</span><span class="when">15-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r5"><span class="tx">Quién cubre los avisos cuando Brenda no está; número para estética</span></label><span class="who">Clínica</span><span class="when">15-oct</span></li></ul><h4 class="pg">Antes del arranque</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r6"><span class="tx">Meta aprueba los mensajes automáticos (~1 día)</span></label><span class="who">Meta</span><span class="when">16-oct</span></li><li class="pi"><label><input type="checkbox" data-k="r7"><span class="tx">Encender la lectura real de los 3 calendarios y verificarla</span></label><span class="who">Jacobo</span><span class="when">15–16 oct</span></li><li class="pi"><label><input type="checkbox" data-k="r8"><span class="tx">Resumen semanal de resultados por WhatsApp (Jacobo, Brenda y la Dra.)</span></label><span class="who">Jacobo</span><span class="when">Antes del arranque</span></li><li class="pi"><label><input type="checkbox" data-k="r9"><span class="tx">Prueba completa en la línea real</span></label><span class="who">Jacobo</span><span class="when">Antes del arranque</span></li></ul><h4 class="pg">Arranque</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r10"><span class="tx">Encender el asistente en la línea real y los mensajes automáticos</span></label><span class="who">Jacobo</span><span class="when">16 o 19 oct</span></li><li class="pi"><label><input type="checkbox" data-k="r11"><span class="tx">Capacitación de 30 min con este manual</span></label><span class="who">Jacobo + Brenda</span><span class="when">Día del arranque</span></li><li class="pi"><label><input type="checkbox" data-k="r12"><span class="tx">Anticipo; piloto de 2 semanas con reporte final; segundo pago al terminar</span></label><span class="who">Dra.</span><span class="when">Día del arranque</span></li></ul><h4 class="pg">Seguridad y administración</h4><ul class="pl"><li class="pi"><label><input type="checkbox" data-k="r13"><span class="tx">Preguntar a Dualhook por firma propia o IPs fijas para la línea real</span></label><span class="who">Jacobo</span><span class="when">Esta semana</span></li><li class="pi"><label><input type="checkbox" data-k="r14"><span class="tx">Actualizar la tarjeta de Dualhook (vence 12/2026)</span></label><span class="who">Jacobo</span><span class="when">Antes de dic</span></li><li class="pi"><label><input type="checkbox" data-k="r15"><span class="tx">Quitar las notas de prueba antes de mandar el manual a la clínica</span></label><span class="who">Jacobo</span><span class="when">Antes de enviar</span></li></ul></details>
 </div>
+</div>
+
+<div id="tab-mant" class="wrap" style="display:none;padding-top:0">
+  <div class="pagehead"><h1>Costos de mantenimiento</h1><div class="sub">Qué servicios usa el asistente, para qué sirve cada uno y cuánto cuesta al mes. La mayoría son gratuitos; hay dos costos fijos de infraestructura y un costo variable de Meta (WhatsApp) que depende de cuántos mensajes se envíen.</div></div>
+
+  <div class="mcards">
+    <div class="mcard"><div class="k">Infraestructura fija</div><div class="v">≈ $345 MXN/mes</div><div class="d">Servidor (Railway) y conexión con WhatsApp Business (Dualhook).</div></div>
+    <div class="mcard"><div class="k">Mensajes de Meta (variable)</div><div class="v">≈ $100–400 MXN/mes</div><div class="d">Según el número de citas y de pacientes que escriben. Se cobra directo a la tarjeta registrada en WhatsApp.</div></div>
+    <div class="mcard"><div class="k">Mantenimiento mensual</div><div class="v">$500 + IVA</div><div class="d">Precio fundadora. Cubre la infraestructura fija, el monitoreo, los respaldos y el soporte.</div></div>
+  </div>
+
+  <div class="mh">1 · Servicios con costo fijo</div>
+  <div class="mt-wrap"><table class="mt">
+    <tr><th>Servicio</th><th>Para qué lo usamos</th><th style="text-align:right">Costo al mes</th></tr>
+    <tr><td><b>Railway</b><span class="tag">plan Hobby</span></td><td>El servidor donde vive el asistente, encendido 24/7: recibe los mensajes, decide qué contestar y corre los envíos automáticos (8:00 am, 9:00 am, 7:00 pm).</td><td class="c">$5 USD<br>≈ $95 MXN</td></tr>
+    <tr><td><b>Dualhook</b><span class="tag">plan Developer · 1 número</span></td><td>Proveedor autorizado por Meta que permite que el asistente y el equipo usen <b>el mismo número</b> al mismo tiempo: el asistente contesta y la clínica sigue usando WhatsApp Business en su iPhone.</td><td class="c">€12<br>≈ $250 MXN</td></tr>
+    <tr class="tot"><td colspan="2">Total fijo</td><td class="c">≈ $345 MXN</td></tr>
+  </table></div>
+
+  <div class="mh">2 · Servicios gratuitos</div>
+  <div class="mt-wrap"><table class="mt">
+    <tr><th>Servicio</th><th>Para qué lo usamos</th><th style="text-align:right">Costo al mes</th></tr>
+    <tr><td><b>Meta Business</b><span class="tag">portafolio + app</span></td><td>La cuenta de la clínica en Meta y la aplicación del asistente. Es donde viven el número, los mensajes automáticos aprobados y el método de pago.</td><td class="c cero">$0</td></tr>
+    <tr><td><b>WhatsApp Business</b><span class="tag">app del iPhone</span></td><td>La app que ya usa la clínica. El equipo sigue contestando desde ahí; esos mensajes no cuestan.</td><td class="c cero">$0</td></tr>
+    <tr><td><b>Supabase</b><span class="tag">plan gratuito</span></td><td>La base de datos (la memoria del asistente). Guarda: pacientes que escriben (nombre y teléfono), en qué paso va cada conversación, citas leídas del calendario y si el paciente confirmó, canceló o pidió reagendar, avisos a Brenda y si ya se entregaron, solicitudes de valoración, configuración (precios, horarios, números) y los conteos diarios para el resumen semanal. Así un reinicio del servidor no borra nada.</td><td class="c cero">$0</td></tr>
+    <tr><td><b>Google Cloud</b><span class="tag">cuenta de servicio</span></td><td>Permite al asistente <b>leer</b> los 3 calendarios de citas (solo lectura: no puede crear, mover ni borrar citas).</td><td class="c cero">$0</td></tr>
+    <tr><td><b>GitHub</b></td><td>Guarda el código del asistente (privado) y publica esta página.</td><td class="c cero">$0</td></tr>
+    <tr><td><b>UptimeRobot</b><span class="tag">plan gratuito</span></td><td>Revisa cada 5 minutos que el asistente esté funcionando y le manda un correo a Jacobo si se cae o si un aviso no se pudo entregar.</td><td class="c cero">$0</td></tr>
+  </table></div>
+
+  <div class="mh">3 · Mensajes de Meta (costo variable)</div>
+  <div class="mt-wrap"><table class="mt">
+    <tr><th>Tipo de mensaje</th><th>Ejemplos</th><th style="text-align:right">Costo por mensaje</th></tr>
+    <tr><td><b>Mensajes automáticos</b><span class="tag">plantillas de utilidad</span></td><td>Confirmación de cita (24 h antes y el mismo día), recordatorio del día, resumen de las 7:00 pm, avisos a Brenda, resumen semanal.</td><td class="c">$0.0085 USD<br>≈ $0.16 MXN</td></tr>
+    <tr><td><b>Respuestas del asistente</b><span class="tag">mensajes de servicio</span></td><td>Todo lo que el asistente contesta cuando un paciente escribe: menú, precios, preguntas de valoración. <b>Los primeros 1,000 del mes son gratis</b>; después, por mensaje.</td><td class="c">1,000 gratis<br>luego $0.0085 USD</td></tr>
+    <tr><td><b>Mensajes del equipo y de los pacientes</b></td><td>Lo que Brenda o el equipo escriben desde la app, y todo lo que mandan los pacientes.</td><td class="c cero">$0</td></tr>
+  </table></div>
+  <div class="mnote"><b>Ejemplo de un mes:</b> 400 citas y 250 pacientes que escriben → ~700 mensajes automáticos ($6 USD) + ~2,000 respuestas, de las cuales 1,000 son gratis ($8.50 USD) = <b>≈ $14.50 USD ≈ $275 MXN</b>. Con menos movimiento baja; en temporada alta sube. Meta cobra cada mes a la tarjeta registrada en la cuenta de WhatsApp de la clínica y emite su propia factura.</div>
+
+  <div class="mh">¿Qué incluye el mantenimiento de $500 + IVA?</div>
+  <ul class="mnote" style="padding-left:18px;font-size:13px;color:var(--ink-1)">
+    <li>Pago de la infraestructura fija (Railway y Dualhook).</li>
+    <li>Monitoreo continuo y atención de fallas.</li>
+    <li>Respaldos de la base de datos.</li>
+    <li>Ajustes menores: cambios de precios, textos, horarios y números de contacto.</li>
+    <li>Revisión del resumen semanal de resultados.</li>
+  </ul>
+  <div class="mnote">Los mensajes de Meta <b>no</b> están incluidos: se cobran directo a la tarjeta de la clínica, así se paga exactamente lo que se usa. Funciones nuevas se cotizan aparte.</div>
+  <div class="mnote" style="color:var(--ink-muted)">Precios de los proveedores a octubre de 2026 (tarifas de Meta para México vigentes desde el 1 de octubre de 2026). Tipo de cambio aproximado: $19 MXN por dólar y $21 MXN por euro. Los proveedores pueden cambiar sus precios; si cambian, se avisa antes de ajustar.</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -549,7 +615,7 @@ render();
 
 (function(){
   const tabs=document.querySelectorAll('.tabs a');
-  function show(t){document.getElementById('tab-manual').style.display=t==='manual'?'':'none';document.getElementById('tab-pend').style.display=t==='pend'?'':'none';tabs.forEach(a=>a.classList.toggle('on',a.dataset.t===t));try{localStorage.setItem('tab',t)}catch(e){}}
+  function show(t){['manual','pend','mant'].forEach(k=>{const e=document.getElementById('tab-'+k);if(e)e.style.display=t===k?'':'none';});tabs.forEach(a=>a.classList.toggle('on',a.dataset.t===t));try{localStorage.setItem('tab',t)}catch(e){}}
   tabs.forEach(a=>a.onclick=()=>show(a.dataset.t));
   let st={};try{st=JSON.parse(localStorage.getItem('pend')||'{}')}catch(e){}
   const boxes=document.querySelectorAll('#tab-pend input[type=checkbox]');
@@ -560,7 +626,7 @@ render();
     b.onchange=()=>{st[b.dataset.k]=b.checked;b.closest('.pi').classList.toggle('hecho',b.checked);try{localStorage.setItem('pend',JSON.stringify(st))}catch(e){};stats();};});
   stats();
   let t='manual';try{t=localStorage.getItem('tab')||'manual'}catch(e){}
-  show(t==='pend'?'pend':'manual');
+  show(['pend','mant'].includes(t)?t:'manual');
 })();
 </script>
 </body>
